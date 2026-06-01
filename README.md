@@ -1,7 +1,3 @@
-Gotchu Ank 😎🔥 — I'll make you a professional GitHub README (resume/project-portfolio worthy). You can paste this directly into your repo's README.md.
-
-
----
 
 🛍️ Customer Shopping Behavior Analysis
 
