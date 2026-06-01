@@ -1,352 +1,446 @@
+# 🛍️ Customer Shopping Behavior Analysis
 
-🛍️ Customer Shopping Behavior Analysis
-
-📌 Project Overview
-
-This project analyzes customer shopping behavior data to uncover purchasing trends, customer engagement patterns, and business insights that can help optimize retail strategies.
-
-The analysis focuses on understanding how factors like gender, age group, subscriptions, discounts, shipping preferences, product categories, reviews, and purchase frequency influence customer purchasing behavior and revenue generation.
-
-The project follows a complete Data Analytics workflow using Python → SQL (MySQL) → Power BI.
-
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![PowerBI](https://img.shields.io/badge/PowerBI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
 
 ---
 
-🎯 Business Problem Statement
+# 📌 Project Overview
 
-A retail company wants to better understand customer purchasing behavior in order to improve:
+This project analyzes **customer shopping behavior** data to uncover valuable business insights related to purchasing patterns, customer engagement, product performance, subscription behavior, discounts, demographics, and sales trends.
 
-Sales performance
+The project follows a complete **Data Analytics Workflow**:
 
-Customer engagement
+**Python → MySQL → Power BI**
 
-Product strategy
-
-Marketing decisions
-
-Long-term customer loyalty
-
-
-Key questions addressed:
-
-Which customer segments generate the highest revenue?
-
-Do subscribed customers spend more?
-
-Which products receive the highest ratings?
-
-How do discounts influence purchasing behavior?
-
-Which categories perform best across customer groups?
-
-
+The goal is to transform raw customer data into meaningful business intelligence that can support **data-driven decision making**.
 
 ---
 
-🛠️ Tech Stack & Tools Used
+# 🎯 Business Problem Statement
 
-Python (Data Cleaning & Feature Engineering)
+A retail company wants to better understand customer shopping behavior to improve:
 
-Libraries used:
+- Sales Performance
+- Customer Satisfaction
+- Customer Retention & Loyalty
+- Product Strategy
+- Marketing Optimization
 
-Pandas
+The company is interested in identifying patterns across:
 
-NumPy
-
-
-Tasks performed:
-
-✔ Data Loading (CSV → Pandas DataFrame)
-
-✔ Exploratory Data Analysis (EDA)
-
-✔ Missing Value Handling
-
-✔ Column Standardization
-
-✔ Feature Engineering
-
-Created new derived columns:
-
-age_group
-
-purchase_frequency_days
-
-
-✔ Data Validation & Cleaning
-
+- Customer Demographics
+- Product Categories
+- Discounts & Promotions
+- Reviews & Ratings
+- Subscription Behavior
+- Purchase Frequency
+- Shipping Preferences
 
 ---
 
-MySQL (Data Storage & SQL Analytics)
+# ⚙️ Tech Stack & Tools Used
 
-Used MySQL Workbench for:
+| Tool | Purpose |
+|------|------|
+| **Python** | Data Cleaning & Feature Engineering |
+| **Pandas** | Data Manipulation & Analysis |
+| **Jupyter Notebook** | Data Processing Environment |
+| **MySQL** | Database Storage & SQL Analytics |
+| **SQL** | Business Query Analysis |
+| **Power BI** | Dashboard Creation & Visualization |
+| **Git & GitHub** | Version Control & Project Hosting |
 
-Database creation
+---
 
-Data loading from Python into MySQL
+# 📂 Dataset Information
 
-Running analytical SQL queries
+The dataset contains customer shopping information including:
 
+- Customer ID
+- Age
+- Gender
+- Product Purchased
+- Category
+- Purchase Amount
+- Location
+- Size
+- Color
+- Season
+- Review Rating
+- Subscription Status
+- Shipping Type
+- Discount Applied
+- Promo Code Usage
+- Previous Purchases
+- Payment Method
+- Purchase Frequency
 
-Database:
+---
 
+# 🧹 Data Cleaning & Preprocessing (Python)
+
+Data preparation and feature engineering were performed using **Python (Pandas)**.
+
+### Steps Performed:
+
+### ✔️ Dataset Import
+
+```python
+import pandas as pd
+df = pd.read_csv("customer_shopping_behavior.csv")
+```
+
+### ✔️ Exploratory Data Analysis
+
+- Dataset Inspection
+- Data Types Analysis
+- Summary Statistics
+- Missing Value Detection
+
+Used functions:
+
+```python
+df.info()
+df.describe()
+df.isnull().sum()
+```
+
+### ✔️ Missing Value Handling
+
+Missing **Review Ratings** were filled using **category-wise median values**.
+
+### ✔️ Column Standardization
+
+Column names were cleaned by:
+
+- Converting to lowercase
+- Replacing spaces with underscores
+
+### ✔️ Feature Engineering
+
+#### Age Group Creation
+
+Created a new feature:
+
+**age_group**
+
+Categories:
+
+- Young Adult
+- Adult
+- Middle-aged
+- Senior
+
+using **quartile-based segmentation**.
+
+#### Purchase Frequency Conversion
+
+Mapped textual frequency values into numerical days.
+
+Example:
+
+| Frequency | Days |
+|------|------|
+| Weekly | 7 |
+| Monthly | 30 |
+| Quarterly | 90 |
+| Annually | 365 |
+
+#### Redundant Column Removal
+
+Removed duplicated information column:
+
+```text
+promo_code_used
+```
+
+---
+
+# 🗄️ Database Integration (MySQL)
+
+The cleaned dataset was integrated into **MySQL Database** using **SQLAlchemy + PyMySQL**.
+
+### Database Created
+
+```text
 customer_behavior
+```
 
-Table:
+### Table Used
 
+```text
 customer
+```
 
-SQL analysis included:
+### Python → MySQL Connection
 
-✔ Revenue analysis by gender
-
-✔ Customer segmentation
-
-✔ Subscription impact analysis
-
-✔ Discount effectiveness analysis
-
-✔ Product review analysis
-
-✔ Category performance analysis
-
-✔ Repeat buyer behavior analysis
-
-✔ Revenue contribution by age groups
-
+The processed DataFrame was directly pushed into MySQL.
 
 ---
 
-Power BI (Dashboard & Visualization)
+# 📊 SQL Business Analysis
 
-Built an interactive dashboard for stakeholder reporting and business insights.
-
-Dashboard features:
-
-✔ KPI Cards
-
-Number of Customers
-
-Average Purchase Amount
-
-Average Review Rating
-
-
-✔ Interactive Filters / Slicers
-
-Gender
-
-Category
-
-Subscription Status
-
-Shipping Type
-
-
-✔ Visualizations
-
-Revenue by Category
-
-Sales by Category
-
-Revenue by Age Group
-
-Sales by Age Group
-
-Customer Subscription Distribution
-
-
+Several analytical SQL queries were executed to answer important business questions.
 
 ---
 
-📂 Project Workflow
+## Q1. Revenue by Gender
 
-Raw Dataset (.csv)
-        ↓
-Python (Cleaning + EDA + Feature Engineering)
-        ↓
-MySQL (Database + SQL Analytics)
-        ↓
-Power BI (Dashboard + Visualization)
-        ↓
-Business Insights & Recommendations
+Compared total revenue generated by:
 
+- Male Customers
+- Female Customers
 
 ---
 
-📊 Key Insights Generated
+## Q2. Discount Users Spending Above Average
 
-1. Revenue Contribution by Gender
+Identified customers who:
 
-Analyzed purchasing behavior differences between male and female customers to identify high-value customer groups.
+- Used discounts
+- Still spent above average purchase amount
 
-2. Subscription Impact
+---
 
-Compared:
-
-Average Spend
-
-Total Revenue
-
-Customer Counts
-
-
-between subscribed and non-subscribed customers.
-
-3. Discount Effectiveness
-
-Identified products and customers where discounts influenced purchasing behavior.
-
-4. Customer Segmentation
-
-Customers categorized into:
-
-New Customers
-
-Returning Customers
-
-Loyal Customers
-
-
-based on previous purchase history.
-
-5. Product Performance Analysis
+## Q3. Top Rated Products
 
 Analyzed:
 
-Top-rated products
-
-Most purchased products
-
-Category-wise performance
-
-
-6. Age Group Analysis
-
-Examined purchasing behavior across:
-
-Young Adult
-
-Adult
-
-Middle-aged
-
-Senior
-
-
-customer groups.
-
+**Top 5 products with highest average review rating**
 
 ---
 
-📸 Dashboard Preview
+## Q4. Shipping Type Comparison
 
-(Add your Power BI dashboard screenshot here)
+Compared purchase amounts between:
 
-Example:
-
-![Dashboard Screenshot](dashboard.png)
-
+- Standard Shipping
+- Express Shipping
 
 ---
 
-📁 Project Files
+## Q5. Subscription Spending Analysis
 
-customer_analysis.ipynb       → Python Cleaning + EDA Notebook
-customer_behavior.sql         → Database Export
-Queries SQL.sql               → Analytical SQL Queries
-customer_shopping_behavior.csv → Dataset
-Customer Behavior Dashboard.pbix → Power BI Dashboard
-README.md
+Compared:
 
+- Subscribers
+- Non-Subscribers
+
+Metrics:
+
+- Customer Count
+- Average Spend
+- Total Revenue
 
 ---
 
-🚀 How To Run The Project
+## Q6. Discount Heavy Products
 
-Python
+Identified products with:
 
-Run:
+**Highest percentage of discounted purchases**
 
-pip install pandas numpy sqlalchemy pymysql
+---
+
+## Q7. Customer Segmentation
+
+Customers were segmented into:
+
+| Segment | Logic |
+|------|------|
+| New | 1 Previous Purchase |
+| Returning | 2-10 Purchases |
+| Loyal | 10+ Purchases |
+
+---
+
+## Q8. Top Products by Category
+
+Found:
+
+**Top 3 most purchased products within each category**
+
+---
+
+## Q9. Repeat Buyers & Subscription Relationship
+
+Analyzed whether:
+
+**Repeat buyers tend to subscribe more frequently**
+
+---
+
+## Q10. Revenue Contribution by Age Group
+
+Compared revenue generated by:
+
+- Young Adult
+- Adult
+- Middle-aged
+- Senior
+
+---
+
+# 📈 Power BI Dashboard
+
+An interactive dashboard was created in **Power BI** to visualize customer behavior patterns.
+
+---
+
+## Dashboard KPIs
+
+### ✔️ Number of Customers
+
+Displays total customer count.
+
+### ✔️ Average Purchase Amount
+
+Displays average spending behavior.
+
+### ✔️ Average Review Rating
+
+Shows overall customer satisfaction.
+
+---
+
+## Dashboard Visualizations
+
+### 📌 Revenue by Category
+
+Category-wise revenue contribution.
+
+### 📌 Sales by Category
+
+Category-wise sales distribution.
+
+### 📌 Revenue by Age Group
+
+Revenue comparison across demographic segments.
+
+### 📌 Sales by Age Group
+
+Purchase activity by age groups.
+
+### 📌 Subscription Status Distribution
+
+Percentage breakdown of subscribers vs non-subscribers.
+
+---
+
+## Dashboard Filters (Slicers)
+
+Interactive filters implemented:
+
+- Subscription Status
+- Gender
+- Category
+- Shipping Type
+
+---
+
+# 📸 Dashboard Preview
+
+> *(Add your dashboard screenshot here)*
+
+```md
+![Dashboard](images/dashboard.png)
+```
+
+---
+
+# 🔍 Key Insights Derived
+
+Some important business insights discovered:
+
+✔️ Customer purchasing behavior varies across demographic groups.
+
+✔️ Subscription status influences spending patterns.
+
+✔️ Certain product categories contribute significantly higher revenue.
+
+✔️ Discount strategies impact customer purchasing decisions.
+
+✔️ Review ratings help identify highly preferred products.
+
+✔️ Loyal and repeat customers exhibit unique purchasing trends.
+
+✔️ Shipping preferences affect purchase behavior.
+
+---
+
+# 📁 Project Structure
+
+```text
+Customer_Shopping_Behavior_Analysis/
+│
+├── customer_analysis.ipynb
+├── customer_behavior.sql
+├── Queries SQL.sql
+├── customer_shopping_behavior.csv
+├── Customer behavior Dashboard.pbix
+├── README.md
+│
+└── images/
+    └── dashboard.png
+```
+
+---
+
+# 🚀 How To Run The Project
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/yourusername/customer_behavior_analysis.git
+```
+
+### 2. Install Dependencies
+
+```bash
+pip install pandas sqlalchemy pymysql
+```
+
+### 3. Run Jupyter Notebook
+
+```bash
+jupyter notebook
+```
+
+### 4. Execute SQL Queries
+
+Import database into **MySQL Workbench**.
+
+### 5. Open Power BI Dashboard
 
 Open:
 
-customer_analysis.ipynb
-
-
----
-
-MySQL
-
-1. Create database:
-
-
-
-CREATE DATABASE customer_behavior;
-
-2. Import SQL file.
-
-
-3. Execute analytical queries.
-
-
-
+```text
+Customer behavior Dashboard.pbix
+```
 
 ---
 
-Power BI
-
-Open:
-
-Customer Behavior Dashboard.pbix
-
-Refresh data connection if required.
-
-
----
-
-🔮 Future Improvements
+# 🔮 Future Improvements
 
 Possible future enhancements:
 
-Predictive Analytics / Machine Learning models
-
-Customer Churn Prediction
-
-Sales Forecasting
-
-Recommendation System
-
-Automated Data Pipeline
-
-
+- Machine Learning Based Customer Segmentation
+- Purchase Prediction Models
+- Customer Lifetime Value Analysis
+- Recommendation System
+- Real-Time Dashboard Integration
 
 ---
 
-👩‍💻 Author
+# 👩‍💻 Author
 
-Ankshika Ghosh
+**Ankshika Ghosh**
 
-Data Analytics Project — Python | MySQL | Power BI
-
+B.Tech CSE | Data Analytics Enthusiast
 
 ---
 
-Optional upgrade for GitHub look ✨
-
-After you add dashboard screenshot:
-
-Put image inside repo folder.
-
-Example:
-
-dashboard.png
-
-Then in README:
-
-## Dashboard Preview
-
-![Power BI Dashboard](dashboard.png)
-
+⭐ If you found this project useful, consider giving the repository a star!
