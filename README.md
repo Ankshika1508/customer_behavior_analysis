@@ -343,9 +343,8 @@ Interactive filters implemented:
 
 # 📸 Dashboard Preview
 
-```md
 ![Dashboard](images/Dashboard.png)
-```
+
 
 ---
 
